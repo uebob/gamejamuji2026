@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7678868871548104327}
   m_Layer: 0
   m_Name: DashRefill
-  m_TagString: Untagged
+  m_TagString: Refill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,3 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f980525bb3e98c40879357ad89b7d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DashRefill
+  noColFrames: 0.4

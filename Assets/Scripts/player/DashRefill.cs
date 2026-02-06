@@ -4,7 +4,7 @@ using System.Collections;
 public class DashRefill : MonoBehaviour
 {
     private Collider2D col;
-    private float noColFrames = 0.5f;
+    [SerializeField] private float noColFrames = 0.5f;
 
     private void Start()
     {
