@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (isReturning) return;
+        if (isReturning || isDashing) return;
 
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
@@ -68,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector2 targetVelocity = moveInput * currentSpeed;
-
         rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, targetVelocity, currentAcceleration * Time.fixedDeltaTime);
     }
 
