@@ -654,7 +654,6 @@ MonoBehaviour:
   lightning: {fileID: 2231900300669994655, guid: 00ecdaf036dbea94399fb333737a13c1, type: 3}
   tentacle: {fileID: 28420043391314642, guid: c812eb9aa52289f4982c32816717e2cb, type: 3}
   bossCrySFX: {fileID: 8300000, guid: 24d39cf691ede6740809b144a450c560, type: 3}
-  lightningSFX: {fileID: 8300000, guid: f7e01f008c5543742a8185c2894d730a, type: 3}
 --- !u!1 &5406059668580856160
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,7 +924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1882656283942902635, guid: cdf61e16bde319946a5dc536bf8a6d54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: 1882656283942902635, guid: cdf61e16bde319946a5dc536bf8a6d54, type: 3}
       propertyPath: m_LocalPosition.z

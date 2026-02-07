@@ -1,11 +1,15 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoadBossScene : MonoBehaviour
 {
+    [SerializeField] private string bossSceneName = "javierrrr";
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-            SceneManager.LoadScene("javierrrr");
+        {
+            // Usamos el sistema de transición
+            SceneChanger.Instance.ChangeScene(bossSceneName);
+        }
     }
 }
