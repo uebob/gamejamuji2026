@@ -23,6 +23,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("Boss")]
     public GameObject boss;
 
+    [Header("Audio Clips")]
+    public AudioClip dashSFX;
+    public AudioClip impactSFX;       // Para DashObject
+    public AudioClip weakpointSFX;    // Impacto del WeakPoint
+    public AudioClip slimeSFX;        // Sonido slime
+ 
+
     private Vector2 refillPrefabPosition;
     private Rigidbody2D rb;
     private Collider2D col;
@@ -34,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
     private CameraShake2D camShake;
 
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -45,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if (isReturning || isDashing)
-            return; 
+            return;
 
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
@@ -64,17 +70,19 @@ public class PlayerMovement : MonoBehaviour
 
         rb.MovePosition(rb.position + moveInput * (isDashing ? dashSpeed : moveSpeed) * Time.fixedDeltaTime);
     }
-    public bool IsReturning()
-    {
-        return isReturning;
-    }   
+
+    public bool IsReturning() => isReturning;
+
     private IEnumerator DashRoutine()
     {
         isDashing = true;
         isDashingGracePeriod = true;
         canDash = false;
 
-        // Creamos refill
+        // Reproducir dash SFX
+        AudioManager.Instance?.PlaySFX(dashSFX, 1f, Random.Range(0.95f, 1.05f));
+
+        // Crear refill
         Instantiate(refillPrefab, rb.position, Quaternion.identity);
         refillPrefabPosition = rb.position;
 
@@ -116,7 +124,6 @@ public class PlayerMovement : MonoBehaviour
         isReturning = false;
         canDash = true;
 
-        // Limpiamos refills antiguos
         CleanupRefills();
     }
 
@@ -129,40 +136,41 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       
-        if (collision.gameObject.layer == LayerMask.NameToLayer("DashObject") && isDashingGracePeriod)
-        {
+        if (!isDashingGracePeriod) return;
 
-            // Rebote visual instantáneo
+        // 1️⃣ DashObject genérico
+        if (collision.gameObject.layer == LayerMask.NameToLayer("DashObject"))
+        {
+            // Rebote visual
             Vector2 bounceDir = (rb.position - (Vector2)collision.transform.position).normalized;
             rb.MovePosition(rb.position + bounceDir * 0.2f);
 
+            // Sonido de impacto
+            AudioManager.Instance?.PlaySFX(impactSFX);
+
             isDashing = false;
             isDashingGracePeriod = false;
 
-            // Iniciamos return al refill
             StartCoroutine(ReturnToRefill());
         }
-
-        if(collision.gameObject.layer == LayerMask.NameToLayer("WeakPoint") && isDashingGracePeriod)
+        // 2️⃣ WeakPoint del boss 
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("WeakPoint"))
         {
-            // CAMERA SHAKE
-            CameraShake2D camShake = Camera.main.GetComponent<CameraShake2D>();
-            if (camShake != null)
-            {
-                camShake.Shake();
-            }
+            // Camera shake
+            camShake?.Shake();
 
-            //hacer daño al boss
+            // Secuencia de sonidos: impacto -> slime -> grito del boss
+            AudioClip[] clips = { weakpointSFX, slimeSFX,};
+            float[] delays = { 0.1f, 0.3f };
+            AudioManager.Instance?.PlaySFXSequence(clips, delays);
 
+            // Daño al boss
             StartCoroutine(boss.GetComponent<BossController>().RecibirDano());
-
 
             isDashing = false;
             isDashingGracePeriod = false;
-            // Iniciamos return al refill
+
             StartCoroutine(ReturnToRefill());
         }
     }
-
 }

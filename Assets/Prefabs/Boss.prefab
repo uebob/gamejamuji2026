@@ -133,6 +133,7 @@ MonoBehaviour:
   player: {fileID: 0}
   weakPoint: {fileID: 1299350551789699750}
   lightning: {fileID: 2231900300669994655, guid: 00ecdaf036dbea94399fb333737a13c1, type: 3}
+  bossCrySFX: {fileID: 8300000, guid: 24d39cf691ede6740809b144a450c560, type: 3}
 --- !u!1001 &2626051866487376198
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -210,7 +210,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   refillPrefab: {fileID: 4940299985124776312, guid: 0ada982cad3f17d48964fbcf82b60a37, type: 3}
-  boss: {fileID: 4432475020086275843, guid: c7e6dcda7900af44cbbe6b92a9720d50, type: 3}
+  boss: {fileID: 0}
+  dashSFX: {fileID: 8300000, guid: 2d4094d6179d4b1459915862a80d9f53, type: 3}
+  impactSFX: {fileID: 8300000, guid: da162a5d056b56e4cba3bcc3be3399f9, type: 3}
+  weakpointSFX: {fileID: 8300000, guid: da162a5d056b56e4cba3bcc3be3399f9, type: 3}
+  slimeSFX: {fileID: 8300000, guid: 0667f7741765ee245b69add44f4739d3, type: 3}
   isDashing: 0
   isDashingGracePeriod: 0
   isReturning: 0

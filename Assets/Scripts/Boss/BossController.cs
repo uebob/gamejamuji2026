@@ -7,7 +7,7 @@ public class BossController : MonoBehaviour
 {
     private int vidaActual;
     [SerializeField] private int vidaMaxima = 3;
-    private enum EstadoBoss {Idle, Atacando, RecibiendoDano, Muerto}
+    private enum EstadoBoss { Idle, Atacando, RecibiendoDano, Muerto }
     private EstadoBoss estadoActual;
 
     [SerializeField] private float tiempoEntreAtaques = 2f;
@@ -18,6 +18,19 @@ public class BossController : MonoBehaviour
     public GameObject lightning;
     private Animator animator;
 
+    [Header("Audio")]
+    public AudioClip bossCrySFX; // arrastrar clip en inspector
+    private AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f; // 2D
+    }
+
     void Start()
     {
         vidaActual = vidaMaxima;
@@ -27,7 +40,6 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
-        
         if (estadoActual == EstadoBoss.Idle && Time.time - tiempoUltimoAtaque >= tiempoEntreAtaques)
         {
             SeleccionarAtaqueAleatorio();
@@ -38,7 +50,7 @@ public class BossController : MonoBehaviour
     void SeleccionarAtaqueAleatorio()
     {
         int ataqueAleatorio = 0;
-        
+
         if (ataqueAleatorio == 0)
         {
             StartCoroutine(EjecutarAtaqueLluvia());
@@ -65,21 +77,21 @@ public class BossController : MonoBehaviour
         }
     }
 
-private IEnumerator EjecutarAtaqueLluvia()
+    private IEnumerator EjecutarAtaqueLluvia()
     {
         List<Vector2> posicionesUsadas = new List<Vector2>();
-        float distanciaMinima = 1.5f; 
+        float distanciaMinima = 1.5f;
 
         for (int i = 0; i < 20; i++)
         {
             Vector2 posicionCandidata = Vector2.zero;
-            bool encontradaPosicionLibre = false; 
+            bool encontradaPosicionLibre = false;
             int intentos = 0;
 
             while (!encontradaPosicionLibre && intentos < 10)
             {
                 intentos++;
-                
+
                 if (Random.Range(0, 3) == 0)
                 {
                     posicionCandidata = player.transform.position;
@@ -97,7 +109,7 @@ private IEnumerator EjecutarAtaqueLluvia()
                     if (Vector2.Distance(posicionCandidata, pos) < distanciaMinima)
                     {
                         choca = true;
-                        break; 
+                        break;
                     }
                 }
 
@@ -130,6 +142,10 @@ private IEnumerator EjecutarAtaqueLluvia()
         vidaActual--;
         estadoActual = EstadoBoss.RecibiendoDano;
 
+        yield return new WaitForSeconds(0.5f);
+        if (bossCrySFX != null)
+            audioSource.PlayOneShot(bossCrySFX);
+
         animator = gameObject.GetComponent<Animator>();
         animator.Play("GREEN_DAMAGE");
 
@@ -154,5 +170,4 @@ private IEnumerator EjecutarAtaqueLluvia()
         estadoActual = EstadoBoss.Idle;
         tiempoUltimoAtaque = Time.time;
     }
-
 }
