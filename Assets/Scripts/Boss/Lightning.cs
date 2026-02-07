@@ -5,6 +5,7 @@ using System.Collections;
 public class Lightning : MonoBehaviour
 {
     [SerializeField] GameObject lightningRay;
+    public AudioClip lightningSFX;    //sonido rayo
     void Start()
     {
         GetComponent<BoxCollider2D>().enabled = false;
@@ -19,10 +20,9 @@ public class Lightning : MonoBehaviour
         yield return new WaitForSeconds(1f);
         GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         GetComponent<BoxCollider2D>().enabled = true;
+        AudioManager.Instance?.PlaySFX(lightningSFX);
         lightningRay.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
-        GetComponent<BoxCollider2D>().enabled = false;
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }

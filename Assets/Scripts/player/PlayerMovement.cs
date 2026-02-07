@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip impactSFX;       // Para DashObject
     public AudioClip weakpointSFX;    // Impacto del WeakPoint
     public AudioClip slimeSFX;        // Sonido slime
+   
 
 
     private Vector2 refillPrefabPosition;

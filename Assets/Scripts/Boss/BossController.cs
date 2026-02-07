@@ -21,10 +21,12 @@ public class BossController : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip bossCrySFX; // arrastrar clip en inspector
+    
     private AudioSource audioSource;
 
     void Awake()
     {
+        animator = gameObject.GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
@@ -73,12 +75,12 @@ public class BossController : MonoBehaviour
 
         do
         {
-            float posX = Random.Range(2.5f, 5.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
-            float posY = Random.Range(2f, 3.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
+            float posX = Random.Range(3f, 6.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
+            float posY = Random.Range(3f, 3.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
             posicion = new Vector2(posX, posY);
             intentos++;
         } 
-        while (Vector2.Distance(posicion, player.transform.position) < 3f && intentos < 15);
+        while (Vector2.Distance(posicion, player.transform.position) < 2f && intentos < 15);
 
         Instantiate(tentacle, posicion, Quaternion.identity);
 
@@ -88,6 +90,8 @@ public class BossController : MonoBehaviour
 
     private IEnumerator EjecutarAtaqueLluvia()
     {
+        animator.Play("MIRAR_ARRIBA");
+
         List<Vector2> posicionesUsadas = new List<Vector2>();
         float distanciaMinima = 1.5f;
 
@@ -155,7 +159,6 @@ public class BossController : MonoBehaviour
         if (bossCrySFX != null)
             audioSource.PlayOneShot(bossCrySFX);
 
-        animator = gameObject.GetComponent<Animator>();
         animator.Play("GREEN_DAMAGE");
 
         if (vidaActual <= 0)
