@@ -16,6 +16,7 @@ public class BossController : MonoBehaviour
     public GameObject player;
     public GameObject weakPoint;
     public GameObject lightning;
+    public GameObject tentacle;
     private Animator animator;
 
     [Header("Audio")]
@@ -49,7 +50,7 @@ public class BossController : MonoBehaviour
 
     void SeleccionarAtaqueAleatorio()
     {
-        int ataqueAleatorio = 0;
+        int ataqueAleatorio = Random.Range(0,2);
 
         if (ataqueAleatorio == 0)
         {
@@ -57,7 +58,7 @@ public class BossController : MonoBehaviour
         }
         else if (ataqueAleatorio == 1)
         {
-            EjecutarAtaqueTentaculo(Random.Range(0, 2) == 0);
+            StartCoroutine(EjecutarAtaqueTentaculo());
         }
         else if (ataqueAleatorio == 2)
         {
@@ -65,16 +66,16 @@ public class BossController : MonoBehaviour
         }
     }
 
-    void EjecutarAtaqueTentaculo(bool esIzquierdo)
+    private IEnumerator EjecutarAtaqueTentaculo()
     {
-        if (esIzquierdo)
-        {
+        float posX = Random.Range(2.5f, 5.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
+        float posY = Random.Range(2f, 3.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
+        Vector2 posicion = new Vector2(posX, posY);
+    
+        Instantiate(tentacle, posicion, Quaternion.identity);
 
-        }
-        else
-        {
-
-        }
+        yield return new WaitForSeconds(1f);
+        FinalizarAtaque();
     }
 
     private IEnumerator EjecutarAtaqueLluvia()
