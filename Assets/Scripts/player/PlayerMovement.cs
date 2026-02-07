@@ -1,28 +1,33 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement")]
     public float moveSpeed = 5f;
-    public float acceleration = 20f;
 
+    [Header("Dash")]
     [SerializeField] private float dashSpeed = 20f;
-    [SerializeField] private float dashAcceleration = 60f;
-    [SerializeField] private float dashDeceleration = 100f;
     [SerializeField] private float dashDuration = 0.2f;
-    [SerializeField] public bool canDash = true;
-    [SerializeField] private float returnSpeed = 15f; 
     [SerializeField] private float dashingGracePeriod = 0.4f;
+    [SerializeField] public bool canDash = true;
+
+    [Header("Return")]
+    [SerializeField] private float returnDuration = 0.35f;
+    [SerializeField] private AnimationCurve returnCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+
+    [Header("Refill")]
     public GameObject refillPrefab;
+
     private Vector2 refillPrefabPosition;
     private Rigidbody2D rb;
     private Collider2D col;
     private Vector2 moveInput;
 
-    private bool isDashing = false;
-    private bool isDashingGracePeriod = false;
-    private bool isReturning = false;
+    [HideInInspector] public bool isDashing = false;
+    [HideInInspector] public bool isDashingGracePeriod = false;
+    public bool isReturning = false;
 
     private void Awake()
     {
@@ -32,59 +37,45 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (isReturning || isDashing) return;
+        if (isReturning || isDashing)
+            return;
 
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         moveInput = new Vector2(moveX, moveY).normalized;
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isDashing)
+        if (Input.GetKeyDown(KeyCode.Space) && canDash && moveInput != Vector2.zero)
         {
-            if (canDash)
-            {
-                if (moveInput != Vector2.zero)
-                {
-                    canDash = false;
-                    StartCoroutine(DashRoutine());
-                }
-            }
+            StartCoroutine(DashRoutine());
         }
     }
 
     private void FixedUpdate()
     {
-        if (isReturning) return;
+        if (isReturning)
+            return;
 
-        float currentSpeed = isDashing ? dashSpeed : moveSpeed;
-        float currentAcceleration = acceleration;
-
-        if (isDashing)
-        {
-            currentAcceleration = dashAcceleration;
-        }
-        else if (rb.linearVelocity.magnitude > moveSpeed + 0.5f)
-        {
-            currentAcceleration = dashDeceleration;
-        }
-
-        Vector2 targetVelocity = moveInput * currentSpeed;
-        rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, targetVelocity, currentAcceleration * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveInput * (isDashing ? dashSpeed : moveSpeed) * Time.fixedDeltaTime);
     }
-
+    public bool IsReturning()
+    {
+        return isReturning;
+    }   
     private IEnumerator DashRoutine()
     {
         isDashing = true;
         isDashingGracePeriod = true;
+        canDash = false;
 
-        Instantiate(refillPrefab, transform.position, transform.rotation);
-        refillPrefabPosition = transform.position;
+        // Creamos refill
+        Instantiate(refillPrefab, rb.position, Quaternion.identity);
+        refillPrefabPosition = rb.position;
 
         yield return new WaitForSeconds(dashDuration);
 
         isDashing = false;
 
         yield return new WaitForSeconds(dashingGracePeriod);
-
         isDashingGracePeriod = false;
     }
 
@@ -93,34 +84,55 @@ public class PlayerMovement : MonoBehaviour
         isReturning = true;
         isDashing = false;
         col.enabled = false;
-        rb.linearVelocity = Vector2.zero;
 
-        while (Vector2.Distance(rb.position, refillPrefabPosition) > 0.1f)
+        Vector2 startPos = rb.position;
+        Vector2 targetPos = refillPrefabPosition;
+        float timer = 0f;
+
+        yield return new WaitForSeconds(0.02f);
+
+        while (Vector2.Distance(rb.position, targetPos) > 0.01f)
         {
-            Vector2 newPos = Vector2.MoveTowards(rb.position, refillPrefabPosition, returnSpeed * Time.deltaTime);
-            rb.MovePosition(newPos);
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / returnDuration);
+            float curveValue = returnCurve.Evaluate(t);
+
+            float step = curveValue * Vector2.Distance(rb.position, targetPos);
+            step = Mathf.Max(step, 0.01f);
+            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPos, step));
+
             yield return null;
         }
 
-        rb.MovePosition(refillPrefabPosition);
+        rb.MovePosition(targetPos);
         col.enabled = true;
         isReturning = false;
+        canDash = true;
 
-        // Destruye los refills si aún quedan (causado por el cooldown que hay para coger el refill)
+        // Limpiamos refills antiguos
+        CleanupRefills();
+    }
+
+    private void CleanupRefills()
+    {
         GameObject[] refills = GameObject.FindGameObjectsWithTag("Refill");
         foreach (GameObject obj in refills)
-        {
             Destroy(obj);
-        }
-        canDash = true; //recarga por si el refill ha sido destruido
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("WeakPoint") && isDashingGracePeriod)
+        // Rebote contra WeakPoint
+        if (collision.gameObject.layer == LayerMask.NameToLayer("DashObject") && isDashingGracePeriod)
         {
+            // Rebote visual instantáneo
+            Vector2 bounceDir = (rb.position - (Vector2)collision.transform.position).normalized;
+            rb.MovePosition(rb.position + bounceDir * 0.2f);
+
             isDashing = false;
             isDashingGracePeriod = false;
+
+            // Iniciamos return al refill
             StartCoroutine(ReturnToRefill());
         }
     }
