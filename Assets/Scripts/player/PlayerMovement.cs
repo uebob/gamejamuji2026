@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip impactSFX;       // Para DashObject
     public AudioClip weakpointSFX;    // Impacto del WeakPoint
     public AudioClip slimeSFX;        // Sonido slime
- 
+
 
     private Vector2 refillPrefabPosition;
     private Rigidbody2D rb;
@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
         camShake = Camera.main.GetComponent<CameraShake2D>();
         camFlash = Camera.main.GetComponent<CameraFlash2D>();
+
     }
 
     private void Update()
@@ -141,10 +142,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Hazard") && !isDashingGracePeriod)
+        if (collision.gameObject.CompareTag("Hazard") && !isDashingGracePeriod)
         {
-            SceneManager.LoadScene("Temp_Door");
+            //SceneManager.LoadScene("Temp_Door");
             //gameManager.GetComponent<DeathManager>().FuckingDie();
+            DeathManager.Instance.FuckingDie(gameObject);
         }
 
         if (!isDashingGracePeriod) return;
@@ -173,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
             camFlash?.Flash();
 
             // Secuencia de sonidos: impacto -> slime -> grito del boss
-            AudioClip[] clips = { weakpointSFX, slimeSFX,};
+            AudioClip[] clips = { weakpointSFX, slimeSFX, };
             float[] delays = { 0.1f, 0.3f };
             AudioManager.Instance?.PlaySFXSequence(clips, delays);
 

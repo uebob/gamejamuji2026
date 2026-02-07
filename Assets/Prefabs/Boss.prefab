@@ -465,7 +465,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2487250878569996988, guid: 4f691df3271c71349839869d55847c21, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -652,6 +652,7 @@ MonoBehaviour:
   player: {fileID: 0}
   weakPoint: {fileID: 1299350551789699750}
   lightning: {fileID: 2231900300669994655, guid: 00ecdaf036dbea94399fb333737a13c1, type: 3}
+  tentacle: {fileID: 28420043391314642, guid: c812eb9aa52289f4982c32816717e2cb, type: 3}
   bossCrySFX: {fileID: 8300000, guid: 24d39cf691ede6740809b144a450c560, type: 3}
 --- !u!1 &5406059668580856160
 GameObject:
@@ -862,7 +863,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2487250878569996988, guid: 4f691df3271c71349839869d55847c21, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
