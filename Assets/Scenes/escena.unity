@@ -147,7 +147,7 @@ Animator:
   m_GameObject: {fileID: 125362755}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d49e3fdcccade04439593e895aab5b9f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 72cba9ce0ee19514996b90d76e0fbd5c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -216,7 +216,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &125362758
 Transform:
@@ -399,7 +399,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeakPoint
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3549735910101884442, guid: cdf61e16bde319946a5dc536bf8a6d54, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

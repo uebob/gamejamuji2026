@@ -29,16 +29,20 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool isDashingGracePeriod = false;
     public bool isReturning = false;
 
+    private CameraShake2D camShake;
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        camShake = Camera.main.GetComponent<CameraShake2D>();
     }
 
     private void Update()
     {
         if (isReturning || isDashing)
-            return;
+            return; 
 
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
@@ -122,9 +126,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Rebote contra WeakPoint
+       
         if (collision.gameObject.layer == LayerMask.NameToLayer("DashObject") && isDashingGracePeriod)
         {
+
             // Rebote visual instantáneo
             Vector2 bounceDir = (rb.position - (Vector2)collision.transform.position).normalized;
             rb.MovePosition(rb.position + bounceDir * 0.2f);
@@ -135,5 +140,21 @@ public class PlayerMovement : MonoBehaviour
             // Iniciamos return al refill
             StartCoroutine(ReturnToRefill());
         }
+
+        if(collision.gameObject.layer == LayerMask.NameToLayer("WeakPoint") && isDashingGracePeriod)
+        {
+            // CAMERA SHAKE
+            CameraShake2D camShake = Camera.main.GetComponent<CameraShake2D>();
+            if (camShake != null)
+            {
+                camShake.Shake();
+            }
+
+            isDashing = false;
+            isDashingGracePeriod = false;
+            // Iniciamos return al refill
+            StartCoroutine(ReturnToRefill());
+        }
     }
+
 }
