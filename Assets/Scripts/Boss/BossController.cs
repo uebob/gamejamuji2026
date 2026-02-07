@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -12,12 +13,13 @@ public class BossController : MonoBehaviour
     [SerializeField] private float tiempoEntreAtaques = 2f;
     private float tiempoUltimoAtaque;
 
+    public GameObject player;
     public GameObject weakPoint;
+    public GameObject lightning;
     private Animator animator;
 
     void Start()
     {
-
         vidaActual = vidaMaxima;
         estadoActual = EstadoBoss.Idle;
         tiempoUltimoAtaque = -tiempoEntreAtaques;
@@ -25,33 +27,27 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
-
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            StartCoroutine(RecibirDano());
-        }
         
         if (estadoActual == EstadoBoss.Idle && Time.time - tiempoUltimoAtaque >= tiempoEntreAtaques)
         {
             SeleccionarAtaqueAleatorio();
             estadoActual = EstadoBoss.Atacando;
-            tiempoUltimoAtaque = Time.time;
         }
     }
 
     void SeleccionarAtaqueAleatorio()
     {
-        int ataqueAleatorio = Random.Range(0, 3);
+        int ataqueAleatorio = 0;
         
         if (ataqueAleatorio == 0)
         {
-            EjecutarAtaqueTentaculo(Random.Range(0, 2) == 0);
+            StartCoroutine(EjecutarAtaqueLluvia());
         }
         else if (ataqueAleatorio == 1)
         {
-            EjecutarAtaqueLluvia();
+            EjecutarAtaqueTentaculo(Random.Range(0, 2) == 0);
         }
-        else
+        else if (ataqueAleatorio == 2)
         {
             EjecutarAtaqueOjo();
         }
@@ -69,10 +65,59 @@ public class BossController : MonoBehaviour
         }
     }
 
-    private IEnumerator EjecutarAtaqueLluvia()
+private IEnumerator EjecutarAtaqueLluvia()
     {
-        estadoActual = EstadoBoss.Atacando;
-        yield return new WaitForSeconds(0.3f);
+        List<Vector2> posicionesUsadas = new List<Vector2>();
+        float distanciaMinima = 1.5f; 
+
+        for (int i = 0; i < 20; i++)
+        {
+            Vector2 posicionCandidata = Vector2.zero;
+            bool encontradaPosicionLibre = false; 
+            int intentos = 0;
+
+            while (!encontradaPosicionLibre && intentos < 10)
+            {
+                intentos++;
+                
+                if (Random.Range(0, 3) == 0)
+                {
+                    posicionCandidata = player.transform.position;
+                }
+                else
+                {
+                    float posX = Random.Range(2f, 6f) * (Random.Range(0, 2) == 0 ? 1 : -1);
+                    float posY = Random.Range(1.5f, 4f) * (Random.Range(0, 2) == 0 ? 1 : -1);
+                    posicionCandidata = new Vector2(posX, posY);
+                }
+
+                bool choca = false;
+                foreach (Vector2 pos in posicionesUsadas)
+                {
+                    if (Vector2.Distance(posicionCandidata, pos) < distanciaMinima)
+                    {
+                        choca = true;
+                        break; 
+                    }
+                }
+
+                if (!choca)
+                {
+                    encontradaPosicionLibre = true;
+                }
+            }
+
+            if (encontradaPosicionLibre)
+            {
+                Instantiate(lightning, posicionCandidata, Quaternion.identity);
+                posicionesUsadas.Add(posicionCandidata);
+            }
+
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        yield return new WaitForSeconds(1f);
+        FinalizarAtaque();
     }
 
     void EjecutarAtaqueOjo()
@@ -107,7 +152,7 @@ public class BossController : MonoBehaviour
     public void FinalizarAtaque()
     {
         estadoActual = EstadoBoss.Idle;
-        tiempoUltimoAtaque = 0f;
+        tiempoUltimoAtaque = Time.time;
     }
 
 }

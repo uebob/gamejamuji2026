@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &18143211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2003374516256770679, guid: 9f4debd86db2e7045bd48d03f001a844, type: 3}
+  m_PrefabInstance: {fileID: 2051810262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &397494065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -364,6 +369,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2326370289330598215, guid: c7e6dcda7900af44cbbe6b92a9720d50, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 18143211}
     - target: {fileID: 4432475020086275843, guid: c7e6dcda7900af44cbbe6b92a9720d50, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -374,7 +383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6467766311353629147, guid: c7e6dcda7900af44cbbe6b92a9720d50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.29
+      value: -0.11
       objectReference: {fileID: 0}
     - target: {fileID: 6467766311353629147, guid: c7e6dcda7900af44cbbe6b92a9720d50, type: 3}
       propertyPath: m_LocalPosition.z
