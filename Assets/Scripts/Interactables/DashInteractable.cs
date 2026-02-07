@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class DashInteractable : MonoBehaviour
 {
@@ -11,9 +12,8 @@ public class DashInteractable : MonoBehaviour
         PlayerMovement player = collision.collider.GetComponent<PlayerMovement>();
         if (player != null && player.isDashing)
         {
-          
             gameObject.SetActive(false); 
-            hasDeactivated = true; 
+            hasDeactivated = true;    
         }
     }
 }

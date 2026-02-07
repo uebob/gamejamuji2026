@@ -18,10 +18,12 @@ public class Lightning : MonoBehaviour
         
         yield return new WaitForSeconds(1f);
         GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
-        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = true;
         lightningRay.SetActive(true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<BoxCollider2D>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 }

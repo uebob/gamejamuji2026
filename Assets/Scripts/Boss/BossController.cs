@@ -66,15 +66,23 @@ public class BossController : MonoBehaviour
         }
     }
 
-    private IEnumerator EjecutarAtaqueTentaculo()
+   private IEnumerator EjecutarAtaqueTentaculo()
     {
-        float posX = Random.Range(2.5f, 5.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
-        float posY = Random.Range(2f, 3.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
-        Vector2 posicion = new Vector2(posX, posY);
-    
+        Vector2 posicion;
+        int intentos = 0;
+
+        do
+        {
+            float posX = Random.Range(2.5f, 5.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
+            float posY = Random.Range(2f, 3.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
+            posicion = new Vector2(posX, posY);
+            intentos++;
+        } 
+        while (Vector2.Distance(posicion, player.transform.position) < 3f && intentos < 15);
+
         Instantiate(tentacle, posicion, Quaternion.identity);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         FinalizarAtaque();
     }
 

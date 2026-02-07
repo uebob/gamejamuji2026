@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -41,11 +42,13 @@ public class PlayerMovement : MonoBehaviour
 
     private CameraShake2D camShake;
     private CameraFlash2D camFlash;
+    [SerializeField] private GameObject gameManager;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+
         camShake = Camera.main.GetComponent<CameraShake2D>();
         camFlash = Camera.main.GetComponent<CameraFlash2D>();
     }
@@ -138,6 +141,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.CompareTag("Hazard") && !isDashingGracePeriod)
+        {
+            SceneManager.LoadScene("Temp_Door");
+            //gameManager.GetComponent<DeathManager>().FuckingDie();
+        }
+
         if (!isDashingGracePeriod) return;
 
         // 1️⃣ DashObject genérico
