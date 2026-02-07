@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5131415076147207799}
   - component: {fileID: 7390455168143882248}
   - component: {fileID: 5007479437326237690}
+  - component: {fileID: 8630483569774493245}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -176,3 +177,17 @@ MonoBehaviour:
     m_RotationOrder: 4
   duration: 1
   magnitude: 0.3
+--- !u!114 &8630483569774493245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240744881826565477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1bd234853d8594ebdb3a342e3232dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFlash2D
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashDuration: 0.08
