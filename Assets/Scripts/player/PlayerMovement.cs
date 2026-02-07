@@ -40,12 +40,14 @@ public class PlayerMovement : MonoBehaviour
     public bool isReturning = false;
 
     private CameraShake2D camShake;
+    private CameraFlash2D camFlash;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         camShake = Camera.main.GetComponent<CameraShake2D>();
+        camFlash = Camera.main.GetComponent<CameraFlash2D>();
     }
 
     private void Update()
@@ -158,6 +160,8 @@ public class PlayerMovement : MonoBehaviour
         {
             // Camera shake
             camShake?.Shake();
+
+            camFlash?.Flash();
 
             // Secuencia de sonidos: impacto -> slime -> grito del boss
             AudioClip[] clips = { weakpointSFX, slimeSFX,};
