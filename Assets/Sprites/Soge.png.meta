@@ -1,0 +1,587 @@
+fileFormatVersion: 2
+guid: b89c3196ee8321c4f8bc1bae8ffa0472
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2487250878569996988
+    second: Soge_0
+  - first:
+      213: 3834537516525636016
+    second: Soge_1
+  - first:
+      213: -238345534950410905
+    second: Soge_2
+  - first:
+      213: 2487669476704368600
+    second: Soge_3
+  - first:
+      213: 294415417931667755
+    second: Soge_4
+  - first:
+      213: 5954352618005750536
+    second: Soge_5
+  - first:
+      213: 6841874083353425653
+    second: Soge_6
+  - first:
+      213: 6226520508104519486
+    second: Soge_7
+  - first:
+      213: 6599490535807896563
+    second: Soge_8
+  - first:
+      213: 5719766394918628427
+    second: Soge_9
+  - first:
+      213: -6505034209506579810
+    second: Soge_10
+  - first:
+      213: 581875455476313748
+    second: Soge_11
+  - first:
+      213: 5441474793311430516
+    second: Soge_12
+  - first:
+      213: -6161707257437904860
+    second: Soge_13
+  - first:
+      213: 6857911572221796190
+    second: Soge_14
+  - first:
+      213: 6212148528116382319
+    second: Soge_15
+  - first:
+      213: 5650154213329327906
+    second: Soge_16
+  - first:
+      213: -7363787858949281042
+    second: Soge_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Soge_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44d9e8301828b7dd0800000000000000
+      internalID: -2487250878569996988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 782811a6ffda76f438b0d1e1cdf8a89c
+      internalID: 460040119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_2
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97787ae590cca924ea45f7db73b718aa
+      internalID: -1380075299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_3
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5a04520da3606c47a895d09ac37d87a
+      internalID: -1583293555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_4
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2971f2e1c3b7594fa1626ed4124fb22
+      internalID: 1846902378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_5
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5e1d727541af41478ff9248425d3bed
+      internalID: -1717568671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_6
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c453f5fa6523f74d9fcae3d065b9c79
+      internalID: -1327056086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_7
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e75306e03ac269046b1ae4d9d4de2624
+      internalID: 551014406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_8
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ec5abf1c0c9f5d4487bfad1eb045eef
+      internalID: -2135835354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_9
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51183cc6e736fc040801d1b4ff33b0dd
+      internalID: -1621197384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_10
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2927f147629a43141be951326f148ab8
+      internalID: -10063617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_11
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b78cfe8f1bb39e40a8eba9cde002bb9
+      internalID: 1939454482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_12
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0231f1dd25657d040a23ee058c7afa2e
+      internalID: -1743115734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_13
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d721be6e02e6c8145a454f2a25c1bf57
+      internalID: -1933398574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_14
+      rect:
+        serializedVersion: 2
+        x: 1568
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f2e964ed264de9489ef02b667fcf252
+      internalID: 1704690239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_15
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae52a9537aaff35449def1331bd436a8
+      internalID: -1569167968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_16
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4196b89a0213684280ac44a3cce8d13
+      internalID: -792205727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soge_17
+      rect:
+        serializedVersion: 2
+        x: 1904
+        y: 2
+        width: 112
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efac123f3440df14f94184e160c993e7
+      internalID: 888634720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 0b5ea86ef4528bd418ea15a6adf5f9a2
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":112.0,"y":78.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Soge_0: -2487250878569996988
+      Soge_1: 460040119
+      Soge_10: -10063617
+      Soge_11: 1939454482
+      Soge_12: -1743115734
+      Soge_13: -1933398574
+      Soge_14: 1704690239
+      Soge_15: -1569167968
+      Soge_16: -792205727
+      Soge_17: 888634720
+      Soge_2: -1380075299
+      Soge_3: -1583293555
+      Soge_4: 1846902378
+      Soge_5: -1717568671
+      Soge_6: -1327056086
+      Soge_7: 551014406
+      Soge_8: -2135835354
+      Soge_9: -1621197384
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
