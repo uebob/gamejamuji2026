@@ -16,7 +16,7 @@ public class CameraShake2D : MonoBehaviour
     }
 
     /// <summary>
-    /// Llama a este método para iniciar el shake
+    /// Llama a este mï¿½todo para iniciar el shake
     /// </summary>
     public void Shake()
     {
@@ -43,7 +43,7 @@ public class CameraShake2D : MonoBehaviour
             yield return null;
         }
 
-        // Asegura que la cámara vuelve a su posición original
+        // Asegura que la cï¿½mara vuelve a su posiciï¿½n original
         transform.localPosition = originalPos;
     }
 }
