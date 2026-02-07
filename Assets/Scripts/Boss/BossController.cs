@@ -7,8 +7,8 @@ public class BossController : MonoBehaviour
 {
     private int vidaActual;
     [SerializeField] private int vidaMaxima = 3;
-    private enum EstadoBoss { Idle, Atacando, RecibiendoDano, Muerto }
-    private EstadoBoss estadoActual;
+    public enum EstadoBoss { Idle, Atacando, RecibiendoDano, Muerto }
+    public EstadoBoss estadoActual;
 
     [SerializeField] private float tiempoEntreAtaques = 2f;
     private float tiempoUltimoAtaque;
@@ -98,8 +98,8 @@ public class BossController : MonoBehaviour
                 }
                 else
                 {
-                    float posX = Random.Range(2f, 6f) * (Random.Range(0, 2) == 0 ? 1 : -1);
-                    float posY = Random.Range(1.5f, 4f) * (Random.Range(0, 2) == 0 ? 1 : -1);
+                    float posX = Random.Range(2.5f, 6f) * (Random.Range(0, 2) == 0 ? 1 : -1);
+                    float posY = Random.Range(2f, 4f) * (Random.Range(0, 2) == 0 ? 1 : -1);
                     posicionCandidata = new Vector2(posX, posY);
                 }
 
