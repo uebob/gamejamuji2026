@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -5,17 +6,17 @@ public class BossController : MonoBehaviour
 {
     private int vidaActual;
     [SerializeField] private int vidaMaxima = 3;
-    private enum EstadoBoss {Idle, Atacando, Muerto}
+    private enum EstadoBoss {Idle, Atacando, RecibiendoDano, Muerto}
     private EstadoBoss estadoActual;
 
     [SerializeField] private float tiempoEntreAtaques = 2f;
     private float tiempoUltimoAtaque;
 
+    public GameObject weakPoint;
     private Animator animator;
 
     void Start()
     {
-        animator = gameObject.GetComponent<Animator>();
 
         vidaActual = vidaMaxima;
         estadoActual = EstadoBoss.Idle;
@@ -24,9 +25,10 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
+
         if(Input.GetKeyDown(KeyCode.F))
         {
-            RecibirDano();
+            StartCoroutine(RecibirDano());
         }
         
         if (estadoActual == EstadoBoss.Idle && Time.time - tiempoUltimoAtaque >= tiempoEntreAtaques)
@@ -67,24 +69,33 @@ public class BossController : MonoBehaviour
         }
     }
 
-    void EjecutarAtaqueLluvia()
-        {
-            
-        }
+    private IEnumerator EjecutarAtaqueLluvia()
+    {
+        estadoActual = EstadoBoss.Atacando;
+        yield return new WaitForSeconds(0.3f);
+    }
 
     void EjecutarAtaqueOjo()
     {
 
     }
 
-    public void RecibirDano()
+    public IEnumerator RecibirDano()
     {
         vidaActual--;
+        estadoActual = EstadoBoss.RecibiendoDano;
+
+        animator = gameObject.GetComponent<Animator>();
         animator.Play("GREEN_DAMAGE");
+
         if (vidaActual <= 0)
         {
             Morir();
         }
+
+        yield return new WaitForSeconds(1);
+
+        estadoActual = EstadoBoss.Idle;
     }
 
     void Morir()
@@ -96,6 +107,7 @@ public class BossController : MonoBehaviour
     public void FinalizarAtaque()
     {
         estadoActual = EstadoBoss.Idle;
+        tiempoUltimoAtaque = 0f;
     }
 
 }

@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Refill")]
     public GameObject refillPrefab;
 
+    [Header("Boss")]
+    public GameObject boss;
+
     private Vector2 refillPrefabPosition;
     private Rigidbody2D rb;
     private Collider2D col;
@@ -149,6 +152,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 camShake.Shake();
             }
+
+            //hacer daño al boss
+
+            StartCoroutine(boss.GetComponent<BossController>().RecibirDano());
+
 
             isDashing = false;
             isDashingGracePeriod = false;
