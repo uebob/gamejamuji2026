@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class DashInteractable : MonoBehaviour
 {
-    private bool used = false;
+    private bool hasDeactivated = false;
 
-    public void OnDashHit()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (used) return;
+        if (hasDeactivated) return;
 
-        used = true;
-        gameObject.SetActive(false);
+        PlayerMovement player = collision.collider.GetComponent<PlayerMovement>();
+        if (player != null && player.isDashing)
+        {
+          
+            gameObject.SetActive(false); 
+            hasDeactivated = true; 
+        }
     }
-   
 }
 
   

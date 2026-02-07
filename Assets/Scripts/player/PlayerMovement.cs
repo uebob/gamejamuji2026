@@ -57,17 +57,22 @@ public class PlayerMovement : MonoBehaviour
 
         rb.MovePosition(rb.position + moveInput * (isDashing ? dashSpeed : moveSpeed) * Time.fixedDeltaTime);
     }
-
+    public bool IsReturning()
+    {
+        return isReturning;
+    }   
     private IEnumerator DashRoutine()
     {
         isDashing = true;
         isDashingGracePeriod = true;
         canDash = false;
 
+        // Creamos refill
         Instantiate(refillPrefab, rb.position, Quaternion.identity);
         refillPrefabPosition = rb.position;
 
         yield return new WaitForSeconds(dashDuration);
+
         isDashing = false;
 
         yield return new WaitForSeconds(dashingGracePeriod);
@@ -104,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         isReturning = false;
         canDash = true;
 
+        // Limpiamos refills antiguos
         CleanupRefills();
     }
 
@@ -116,20 +122,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("DashObject")
-            && isDashingGracePeriod)
+        // Rebote contra WeakPoint
+        if (collision.gameObject.layer == LayerMask.NameToLayer("DashObject") && isDashingGracePeriod)
         {
+            // Rebote visual instantáneo
             Vector2 bounceDir = (rb.position - (Vector2)collision.transform.position).normalized;
             rb.MovePosition(rb.position + bounceDir * 0.2f);
 
+            isDashing = false;
+            isDashingGracePeriod = false;
+
+            // Iniciamos return al refill
             StartCoroutine(ReturnToRefill());
-
-            DashInteractable interactable = collision.gameObject.GetComponent<DashInteractable>();
-
-            if(interactable != null)
-                interactable.OnDashHit();
-
         }
     }
 }
-    
