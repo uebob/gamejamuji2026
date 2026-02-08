@@ -1,27 +1,43 @@
 using UnityEngine;
 using System.Collections;
 
-
 public class Lightning : MonoBehaviour
 {
     [SerializeField] GameObject lightningRay;
-    public AudioClip lightningSFX;    //sonido rayo
+    public AudioClip lightningSFX;
+
+    private SpriteRenderer sr;
+    private BoxCollider2D col;
+
+    void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        col = GetComponent<BoxCollider2D>();
+    }
+
     void Start()
     {
-        GetComponent<BoxCollider2D>().enabled = false;
-        lightningRay.SetActive(false);
+        if (col != null) col.enabled = false;
+        if (lightningRay != null) lightningRay.SetActive(false);
         StartCoroutine(Strike());
     }
 
     private IEnumerator Strike()
     {
-        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
-        
+        if (sr != null) sr.color = new Color(1f, 1f, 1f, 0.5f);
+
         yield return new WaitForSeconds(1f);
-        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
-        GetComponent<BoxCollider2D>().enabled = true;
-        AudioManager.Instance?.PlaySFX(lightningSFX);
-        lightningRay.SetActive(true);
+
+        // Si el objeto fue destruido mientras esperábamos, salimos
+        if (this == null) yield break;
+
+        if (sr != null) sr.color = new Color(1f, 1f, 1f, 1f);
+        if (col != null) col.enabled = true;
+
+        // El AudioManager a veces da tirones si se llama muchas veces seguidas
+        if (lightningSFX != null) AudioManager.Instance?.PlaySFX(lightningSFX);
+
+        if (lightningRay != null) lightningRay.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
