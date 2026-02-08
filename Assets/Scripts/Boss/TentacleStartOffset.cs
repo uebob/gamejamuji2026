@@ -16,7 +16,8 @@ public class TentacleStartOffset : MonoBehaviour
 
     void Update()
     {
-        if (boss.GetComponent<BossController>().estadoActual == BossController.EstadoBoss.RecibiendoDano)
+        if (boss.GetComponent<BossController>().estadoActual == BossController.EstadoBoss.RecibiendoDano || 
+        boss.GetComponent<BossController>().estadoActual == BossController.EstadoBoss.Muerto )
         {
             if(!isLoco) StartCoroutine(VolverseLoco());
         }

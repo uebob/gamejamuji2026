@@ -6,10 +6,15 @@ public class DashInteractable : MonoBehaviour
     private bool hasDeactivated = false;
     private Animator animator;
     private Collider2D col;
+    public AudioClip popupSFX;
+    private AudioSource audioSource;
+
     [SerializeField] float tiempoAutodestruccion = 5f; // Para que no se acumulen
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(popupSFX);
         animator = GetComponent<Animator>();
         col = GetComponent<Collider2D>();
     }

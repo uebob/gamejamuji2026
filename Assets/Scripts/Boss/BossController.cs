@@ -18,6 +18,8 @@ public class BossController : MonoBehaviour
     public GameObject tentacle;
     public GameObject followingTentacle;
     private Animator animator;
+    
+    // Ya no necesitamos 'sr' aquí solo para el Boss, lo cogeremos localmente en Morir para todos
 
     private int layerWeakPoint;
     private int layerDashObject;
@@ -25,6 +27,8 @@ public class BossController : MonoBehaviour
     [Header("Audio")]
     public AudioClip bossCrySFX;
     public AudioClip startingRoarSFX;
+    public AudioClip deathSFX;
+    public AudioClip chuparSFX;
     private AudioSource audioSource;
 
     [Header("Config Succion")]
@@ -57,12 +61,16 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
-        // Solo si estamos en Idle Y ha pasado el tiempo, atacamos
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            StartCoroutine(Morir());
+        }
+    
         if (estadoActual == EstadoBoss.Idle)
         {
             if (Time.time - tiempoUltimoAtaque >= tiempoEntreAtaques)
             {
-                estadoActual = EstadoBoss.Atacando; // Bloqueo inmediato del estado
+                estadoActual = EstadoBoss.Atacando; 
                 SeleccionarAtaqueAleatorio();
             }
         }
@@ -81,10 +89,8 @@ public class BossController : MonoBehaviour
 
     void SeleccionarAtaqueAleatorio()
     {
-        // Limpiamos cualquier corrutina previa por seguridad
         StopAllCoroutines();
 
-        //si hay tentaculo :3
         GameObject tentacleAlive = GameObject.FindGameObjectWithTag("FollowingTentacle");
 
         int ataqueAleatorio;
@@ -102,21 +108,19 @@ public class BossController : MonoBehaviour
         else if (ataqueAleatorio == 1) StartCoroutine(EjecutarAtaqueTentaculo());
         else if (ataqueAleatorio == 2) StartCoroutine(EjecutarAtaqueLluvia());
         else if (ataqueAleatorio == 3) StartCoroutine(EjecutarAtaqueSuccion());
-        {
-            
-        }
     }
 
     private IEnumerator EjecutarAtaqueSuccion()
     {
         estadoActual = EstadoBoss.Succionando;
-        //animator.Play("SUCCIONAR");
+        animator.Play("GREEN_DAMAGE");
+        audioSource.PlayOneShot(chuparSFX);
 
         CameraShake2D camScript = Camera.main.GetComponent<CameraShake2D>();
 
         if(camScript != null) camScript.isInducingShake = true;
 
-        yield return new WaitForSeconds(0.8f); // Pequeña anticipación antes de empezar a succionar 
+        yield return new WaitForSeconds(1f); 
 
         float tiempoPasado = 0f;
         while (tiempoPasado < duracionSuccion)
@@ -130,8 +134,8 @@ public class BossController : MonoBehaviour
         PlayerMovement pm = player.GetComponent<PlayerMovement>();
        if(pm!= null)
        {
-            pm.fuerzaSuccionExterna= Vector2.zero;
-            pm.multiplicadorVelocidadExterna = 1f;
+           pm.fuerzaSuccionExterna= Vector2.zero;
+           pm.multiplicadorVelocidadExterna = 1f;
        }
 
        FinalizarAtaque();
@@ -153,9 +157,7 @@ public class BossController : MonoBehaviour
             PlayerMovement pm = player.GetComponent<PlayerMovement>();
             if (pm != null)
             {
-
                 pm.fuerzaSuccionExterna = empuje;
-
                 pm.multiplicadorVelocidadExterna = 0.2f;
             }
         }
@@ -171,7 +173,6 @@ public class BossController : MonoBehaviour
 
     private IEnumerator EjecutarAtaqueTentaculo()
     {
-        // Sin bucles: Calculamos una posici�n y listo
         float posX = Random.Range(3f, 6.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
         float posY = Random.Range(3f, 3.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
         Vector2 posicion = new Vector2(posX, posY);
@@ -186,10 +187,9 @@ public class BossController : MonoBehaviour
     {
         animator.Play("MIRAR_ARRIBA");
 
-        // Lista para recordar dónde han caído los rayos en esta tanda
         List<Vector2> posicionesUsadas = new List<Vector2>();
-        float radioSeguridad = 1.5f; // Ajusta esto según el ancho de tu sprite del rayo
-        float radioCuadrado = radioSeguridad * radioSeguridad; // Optimización: evitamos raíces cuadradas
+        float radioSeguridad = 1.5f; 
+        float radioCuadrado = radioSeguridad * radioSeguridad;
 
         for (int i = 0; i < 20; i++)
         {
@@ -197,12 +197,10 @@ public class BossController : MonoBehaviour
             bool posicionValida = false;
             int intentos = 0;
 
-            // Intentamos encontrar una posición válida (máximo 10 intentos para no colgar el juego)
             while (!posicionValida && intentos < 10)
             {
                 intentos++;
 
-                // 30% probabilidad de ir al jugador (solo en el primer intento para no sesgar)
                 if (intentos == 1 && Random.value < 0.3f && player != null)
                 {
                     posicionCandidata = player.transform.position;
@@ -214,23 +212,19 @@ public class BossController : MonoBehaviour
                     posicionCandidata = new Vector2(posX, posY);
                 }
 
-                // Comprobamos si esta posición choca con alguna anterior
                 posicionValida = true;
                 foreach (Vector2 posExistente in posicionesUsadas)
                 {
-                    // Usamos sqrMagnitude que es mucho más rápido que Distance
                     if ((posicionCandidata - posExistente).sqrMagnitude < radioCuadrado)
                     {
                         posicionValida = false;
-                        break; // Ya choca con una, descartamos y probamos otra vez
+                        break; 
                     }
                 }
             }
 
-            // Instanciamos en la posición encontrada (o la última probada si fallaron los 10 intentos)
             Instantiate(lightning, posicionCandidata, Quaternion.identity);
             
-            // Guardamos la posición en la lista para que los siguientes rayos la eviten
             posicionesUsadas.Add(posicionCandidata);
 
             yield return new WaitForSeconds(0.1f);
@@ -248,7 +242,7 @@ public class BossController : MonoBehaviour
         if (weakPoint != null) weakPoint.layer = layerWeakPoint;
         animator.Play("GREEN_IDLE");
 
-        yield return new WaitForSeconds(1.5f); // Un poco m�s de tiempo para castigarle
+        yield return new WaitForSeconds(1.5f);
 
         if (estadoActual == EstadoBoss.Vulnerable)
         {
@@ -276,7 +270,7 @@ public class BossController : MonoBehaviour
 
         if (vidaActual <= 0)
         {
-            Morir();
+            StartCoroutine(Morir());
         }
         else
         {
@@ -287,9 +281,44 @@ public class BossController : MonoBehaviour
         }
     }
 
-    void Morir()
+    private IEnumerator Morir()
     {
         estadoActual = EstadoBoss.Muerto;
+        animator.Play("BOSS_DIE");
+        if (deathSFX != null) audioSource.PlayOneShot(deathSFX);
+
+        yield return new WaitForSeconds(3f);
+
+        // --- CAMBIO AQUÍ: Obtenemos el Boss y TODOS sus hijos ---
+        SpriteRenderer[] allSprites = GetComponentsInChildren<SpriteRenderer>();
+        
+        // Guardamos los colores originales de cada parte
+        Color[] startColors = new Color[allSprites.Length];
+        for (int i = 0; i < allSprites.Length; i++)
+        {
+            startColors[i] = allSprites[i].color;
+        }
+
+        float fadeDuration = 3f;
+        float timer = 0f;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / fadeDuration; // 0 a 1
+
+            // Iteramos sobre todas las partes (cuerpo + tentáculos)
+            for (int i = 0; i < allSprites.Length; i++)
+            {
+                if (allSprites[i] != null)
+                {
+                    float currentAlpha = Mathf.Lerp(startColors[i].a, 0f, t);
+                    allSprites[i].color = new Color(startColors[i].r, startColors[i].g, startColors[i].b, currentAlpha);
+                }
+            }
+            yield return null;
+        }
+
         gameObject.SetActive(false);
     }
 

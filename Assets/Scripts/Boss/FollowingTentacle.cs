@@ -11,10 +11,14 @@ public class FollowingTentacle : MonoBehaviour
     private bool moving = false;
     private Animator animator;
     private Collider2D col;
+    public AudioClip popupSFX;
+    private AudioSource audioSource;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(popupSFX);
         player = GameObject.FindGameObjectWithTag("Player");
         col = GetComponent<Collider2D>();
         col.enabled = false;
@@ -37,8 +41,9 @@ public class FollowingTentacle : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         moving = true;
+        yield return new WaitForSeconds(0.5f);
         col.enabled = true;
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(3.5f);
 
         if (animator != null)
         {

@@ -309,7 +309,7 @@ MonoBehaviour:
   weakpointSFX: {fileID: 8300000, guid: da162a5d056b56e4cba3bcc3be3399f9, type: 3}
   slimeSFX: {fileID: 8300000, guid: 0667f7741765ee245b69add44f4739d3, type: 3}
   PiedraSFX: {fileID: 8300000, guid: 194269584e50c47428a1dc377f9d4e13, type: 3}
-  DeathSFX: {fileID: 0}
+  DeathSFX: {fileID: 8300000, guid: 3e1485f49fb70434d8f01cdd304076eb, type: 3}
   fuerzaSuccionExterna: {x: 0, y: 0}
   multiplicadorVelocidadExterna: 1
   isDashing: 0
