@@ -18,7 +18,7 @@ TagManager:
   - DashObject
   - WeakPoint
   - Hazard
-  - 
+  - TP
   - 
   - 
   - 
@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1406932857
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

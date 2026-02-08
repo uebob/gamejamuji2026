@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 8aa828b0fd87e784c936de3702f2122b
+guid: 0549f2e657bd9d74faaab82ca430c1bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5400902895686879677
-    second: Pinos_0
-  - first:
-      213: 4397241942951283636
-    second: Pinos_1
-  - first:
-      213: -75395577340631961
-    second: Pinos_2
+      213: -9152689546471649384
+    second: piedra_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,67 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pinos_0
+      name: piedra_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 36
-        height: 46
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        x: 23
+        y: 24
+        width: 81
+        height: 75
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 346743c7e632c05b0800000000000000
-      internalID: -5400902895686879677
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Pinos_1
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 0
-        width: 35
-        height: 46
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4bb4f01ef34260d30800000000000000
-      internalID: 4397241942951283636
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Pinos_2
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 0
-        width: 32
-        height: 46
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 764e9f23f1424fef0800000000000000
-      internalID: -75395577340631961
+      spriteID: 89f402bb95d1bf080800000000000000
+      internalID: -9152689546471649384
       vertices: []
       indices: 
       edges: []
@@ -175,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 22f63244ec8334345b1b2f3739406219
+    spriteID: ea4cb08be6909d345b51f83c7e3a166a
     internalID: 0
     vertices: []
     indices: 
@@ -183,13 +133,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":1.0},"gridSpriteSize":{"x":35.0,"y":46.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Pinos_0: -5400902895686879677
-      Pinos_1: 4397241942951283636
-      Pinos_2: -75395577340631961
+      piedra_0: -9152689546471649384
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

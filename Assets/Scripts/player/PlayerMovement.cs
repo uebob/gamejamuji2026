@@ -195,9 +195,8 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         if (SceneChanger.Instance != null)
-            SceneChanger.Instance.ChangeScene("Temp_Door");
-        else
-            SceneManager.LoadScene("Temp_Door");
+            SceneChanger.Instance.ChangeScene("Intro");
+      
     }
 
     private IEnumerator ReturnToRefill()
