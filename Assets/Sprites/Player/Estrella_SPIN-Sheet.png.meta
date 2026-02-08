@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: 8000437462321218868
     second: Estrella_SPIN-Sheet_1
+  - first:
+      213: -2849511336454049004
+    second: Estrella_SPIN-Sheet_2
+  - first:
+      213: 6275346294018712979
+    second: Estrella_SPIN-Sheet_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -108,8 +114,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 21
-        height: 21
+        width: 19
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,10 +134,10 @@ TextureImporter:
       name: Estrella_SPIN-Sheet_1
       rect:
         serializedVersion: 2
-        x: 21
+        x: 19
         y: 0
-        width: 21
-        height: 21
+        width: 19
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +156,20 @@ TextureImporter:
       name: Estrella_SPIN-Sheet_2
       rect:
         serializedVersion: 2
-        x: 42
+        x: 38
         y: 0
-        width: 21
-        height: 21
+        width: 19
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c579bf81540074a4b9c14542a0d607d9
-      internalID: -1870003076
+      spriteID: 413353f69808478d0800000000000000
+      internalID: -2849511336454049004
       vertices: []
       indices: 
       edges: []
@@ -172,20 +178,20 @@ TextureImporter:
       name: Estrella_SPIN-Sheet_3
       rect:
         serializedVersion: 2
-        x: 63
+        x: 57
         y: 0
-        width: 21
-        height: 21
+        width: 19
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 44296c7bb343c994cb7f2997ff6a2735
-      internalID: 1667505484
+      spriteID: 395ac89c432861750800000000000000
+      internalID: 6275346294018712979
       vertices: []
       indices: 
       edges: []
@@ -194,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 98829f1a408ef984bab1f8583f0508bd
+    spriteID: 983bac50fd166324ba71cc8d28064c80
     internalID: 0
     vertices: []
     indices: 
@@ -204,12 +210,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":21.0,"y":21.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":19.0,"y":19.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Estrella_SPIN-Sheet_0: 5816568537728743787
       Estrella_SPIN-Sheet_1: 8000437462321218868
-      Estrella_SPIN-Sheet_2: -1870003076
-      Estrella_SPIN-Sheet_3: 1667505484
+      Estrella_SPIN-Sheet_2: -2849511336454049004
+      Estrella_SPIN-Sheet_3: 6275346294018712979
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
