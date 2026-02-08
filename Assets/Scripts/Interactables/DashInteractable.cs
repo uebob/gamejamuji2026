@@ -57,7 +57,7 @@ public class DashInteractable : MonoBehaviour
 
     private IEnumerator ActivateCollision()
     {
-       yield return new WaitForSeconds(0.5f);
+       yield return new WaitForSeconds(1f);
        if (col != null) col.enabled = true;
     }
 }
