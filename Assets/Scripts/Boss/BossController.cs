@@ -61,11 +61,6 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            StartCoroutine(Morir());
-        }
-    
         if (estadoActual == EstadoBoss.Idle)
         {
             if (Time.time - tiempoUltimoAtaque >= tiempoEntreAtaques)

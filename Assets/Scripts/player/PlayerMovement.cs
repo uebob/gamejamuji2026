@@ -185,6 +185,8 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator DieRoutine()
     {
+        animator.Play("PLAYER_DEATH");
+
         if (isDead) yield break;
         isDead = true;
 
