@@ -16,6 +16,7 @@ public class BossController : MonoBehaviour
     public GameObject weakPoint;
     public GameObject lightning;
     public GameObject tentacle;
+    public GameObject followingTentacle;
     private Animator animator;
 
     private int layerWeakPoint;
@@ -77,21 +78,29 @@ public class BossController : MonoBehaviour
         // Limpiamos cualquier corrutina previa por seguridad
         StopAllCoroutines();
 
-        int ataqueAleatorio = Random.Range(0, 2);
+        int ataqueAleatorio = Random.Range(0, 3);
         if (ataqueAleatorio == 0) StartCoroutine(EjecutarAtaqueLluvia());
-        else StartCoroutine(EjecutarAtaqueTentaculo());
+        else if (ataqueAleatorio == 1) StartCoroutine(EjecutarAtaqueTentaculo());
+        else if (ataqueAleatorio == 2) StartCoroutine(EjecutarAtaqueFollow());
+    }
+
+    private IEnumerator EjecutarAtaqueFollow()
+    {
+        Instantiate(followingTentacle, player.transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.2f);
+        FinalizarAtaque();
     }
 
     private IEnumerator EjecutarAtaqueTentaculo()
     {
-        // Sin bucles: Calculamos una posición y listo
+        // Sin bucles: Calculamos una posiciï¿½n y listo
         float posX = Random.Range(3f, 6.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
         float posY = Random.Range(3f, 3.5f) * (Random.Range(0, 2) == 0 ? 1 : -1);
         Vector2 posicion = new Vector2(posX, posY);
 
         Instantiate(tentacle, posicion, Quaternion.identity);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0f);
         FinalizarAtaque();
     }
 
@@ -99,7 +108,7 @@ public class BossController : MonoBehaviour
     {
         animator.Play("MIRAR_ARRIBA");
 
-        // Bajamos la cantidad a 15 para ser más ligeros
+        // Bajamos la cantidad a 15 para ser mï¿½s ligeros
         for (int i = 0; i < 15; i++)
         {
             Vector2 posicion;
@@ -134,7 +143,7 @@ public class BossController : MonoBehaviour
         if (weakPoint != null) weakPoint.layer = layerWeakPoint;
         animator.Play("GREEN_IDLE");
 
-        yield return new WaitForSeconds(1.5f); // Un poco más de tiempo para castigarle
+        yield return new WaitForSeconds(1.5f); // Un poco mï¿½s de tiempo para castigarle
 
         if (estadoActual == EstadoBoss.Vulnerable)
         {
