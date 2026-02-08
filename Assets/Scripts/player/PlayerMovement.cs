@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -29,8 +29,9 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip impactSFX;
     public AudioClip weakpointSFX;
     public AudioClip slimeSFX;
-
     public AudioClip PiedraSFX;
+    public AudioClip DeathSFX;
+    
 
     private Vector2 refillPrefabPosition;
     private Rigidbody2D rb;
@@ -186,6 +187,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isDead) yield break;
         isDead = true;
+
+        AudioManager.Instance?.PlaySFX(DeathSFX);
+        
         if (col != null) col.enabled = false;
         
         yield return new WaitForSeconds(1f);
@@ -243,7 +247,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isDead) return;
 
-        if (collision.gameObject.CompareTag("Hazard") && !isDashingGracePeriod)
+        if ((collision.gameObject.CompareTag("Hazard") || collision.gameObject.CompareTag("FollowingTentacle")) && !isDashingGracePeriod)
         {
             StartCoroutine(DieRoutine()); 
             return;

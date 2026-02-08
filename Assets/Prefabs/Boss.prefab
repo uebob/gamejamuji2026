@@ -656,6 +656,9 @@ MonoBehaviour:
   followingTentacle: {fileID: 28420043391314642, guid: c3cdffcdb20cb2d49b1aa96b529c8a88, type: 3}
   bossCrySFX: {fileID: 8300000, guid: 24d39cf691ede6740809b144a450c560, type: 3}
   startingRoarSFX: {fileID: 8300000, guid: b29b3093561f54f4bac521403afde460, type: 3}
+  duracionSuccion: 5
+  fuerzaSuccion: 6.7
+  radioSuccion: 10
 --- !u!1 &5406059668580856160
 GameObject:
   m_ObjectHideFlags: 0

@@ -260,7 +260,6 @@ public class BossController : MonoBehaviour
     private void CerrarOjo()
     {
         if (weakPoint != null) weakPoint.layer = layerDashObject;
-        animator.Play("CLOSED_IDLE");
     }
 
     public IEnumerator RecibirDano()
@@ -274,7 +273,6 @@ public class BossController : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
         if (bossCrySFX != null) audioSource.PlayOneShot(bossCrySFX);
-        animator.Play("GREEN_DAMAGE");
 
         if (vidaActual <= 0)
         {
@@ -284,6 +282,7 @@ public class BossController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.2f);
             CerrarOjo();
+            animator.Play("GREEN_DAMAGE");
             FinalizarAtaque();
         }
     }
