@@ -109,7 +109,7 @@ public class BossController : MonoBehaviour
         animator.Play("MIRAR_ARRIBA");
 
         // Bajamos la cantidad a 15 para ser m�s ligeros
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 20; i++)
         {
             Vector2 posicion;
             // 30% de probabilidad de ir al jugador, 70% aleatorio
@@ -177,7 +177,7 @@ public class BossController : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.2f);
             CerrarOjo();
             FinalizarAtaque();
         }
