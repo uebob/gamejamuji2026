@@ -12,11 +12,23 @@ public class CameraShake2D : MonoBehaviour
     public float softDuration = 0.15f;
     public float softMagnitude = 0.1f;
 
+    public bool isInducingShake = false;
+
     private Vector3 originalPos;
 
     private void Awake()
     {
         originalPos = transform.localPosition;
+    }
+
+    private void Update()
+    {
+        if (isInducingShake)
+        {
+            float offsetX = (Random.value * 2f - 1f) * softMagnitude;
+            float offsetY = (Random.value * 2f - 1f) * softMagnitude;
+            transform.localPosition = originalPos + new Vector3(offsetX, offsetY, 0f);
+        }
     }
 
     public void Shake()

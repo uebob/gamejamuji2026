@@ -37,7 +37,10 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
 
     private SpriteRenderer sr;
-    
+
+    [HideInInspector] public Vector2 fuerzaSuccionExterna;
+    [HideInInspector] public float multiplicadorVelocidadExterna = 1f;
+
     [HideInInspector] public bool isDashing = false;
     [HideInInspector] public bool isDashingGracePeriod = false;
     public bool isReturning = false;
@@ -99,7 +102,14 @@ public class PlayerMovement : MonoBehaviour
         if (isReturning || isDead)
             return;
 
-        rb.MovePosition(rb.position + moveInput * (isDashing ? dashSpeed : moveSpeed) * Time.fixedDeltaTime);
+        //rb.MovePosition(rb.position + moveInput * (isDashing ? dashSpeed : moveSpeed) * Time.fixedDeltaTime);
+
+        Vector2 velocudadActual = moveInput * (isDashing ? dashSpeed : moveSpeed);
+        Vector2 movimientoFinal = velocudadActual + fuerzaSuccionExterna;
+        rb.MovePosition(rb.position + movimientoFinal * Time.fixedDeltaTime);
+        fuerzaSuccionExterna = Vector2.zero;
+        multiplicadorVelocidadExterna = 1f;
+
     }
 
     public bool IsReturning() => isReturning;

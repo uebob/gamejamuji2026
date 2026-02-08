@@ -6,7 +6,7 @@ public class BossController : MonoBehaviour
 {
     private int vidaActual;
     [SerializeField] private int vidaMaxima = 3;
-    public enum EstadoBoss { Idle, Atacando, RecibiendoDano, Vulnerable, Muerto, EmpezandoCombate }
+    public enum EstadoBoss { Idle, Atacando, RecibiendoDano, Vulnerable, Muerto, EmpezandoCombate, Succionando }
     public EstadoBoss estadoActual;
 
     [SerializeField] private float tiempoEntreAtaques = 2f;
@@ -26,6 +26,12 @@ public class BossController : MonoBehaviour
     public AudioClip bossCrySFX;
     public AudioClip startingRoarSFX;
     private AudioSource audioSource;
+
+    [Header("Config Succion")]
+    [SerializeField] private float duracionSuccion = 5f;
+    [SerializeField] private float fuerzaSuccion = 3f;
+    [SerializeField] private float radioSuccion = 10f;
+
 
     void Awake()
     {
@@ -84,18 +90,77 @@ public class BossController : MonoBehaviour
         int ataqueAleatorio;
         if(tentacleAlive!=null) 
         {
-            ataqueAleatorio = Random.Range(1, 3);
+            ataqueAleatorio = Random.Range(1, 4);
         }
         else 
         {
-            ataqueAleatorio = Random.Range(0, 3);
+            ataqueAleatorio = Random.Range(0, 4);
         }
 
         
         if (ataqueAleatorio == 0) StartCoroutine(EjecutarAtaqueFollow());
         else if (ataqueAleatorio == 1) StartCoroutine(EjecutarAtaqueTentaculo());
         else if (ataqueAleatorio == 2) StartCoroutine(EjecutarAtaqueLluvia());
+        else if (ataqueAleatorio == 3) StartCoroutine(EjecutarAtaqueSuccion());
+        {
+            
+        }
     }
+
+    private IEnumerator EjecutarAtaqueSuccion()
+    {
+        estadoActual = EstadoBoss.Succionando;
+        //animator.Play("SUCCIONAR");
+
+        CameraShake2D camScript = Camera.main.GetComponent<CameraShake2D>();
+
+        if(camScript != null) camScript.isInducingShake = true;
+
+        yield return new WaitForSeconds(0.8f); // Pequeña anticipación antes de empezar a succionar 
+
+        float tiempoPasado = 0f;
+        while (tiempoPasado < duracionSuccion)
+        {
+            AplicarFuerzaSuccion();
+            tiempoPasado+= Time.deltaTime;
+            yield return null;
+        }
+
+        if (camScript != null) camScript.isInducingShake = false;
+        PlayerMovement pm = player.GetComponent<PlayerMovement>();
+       if(pm!= null)
+       {
+            pm.fuerzaSuccionExterna= Vector2.zero;
+            pm.multiplicadorVelocidadExterna = 1f;
+       }
+
+       FinalizarAtaque();
+    }   
+
+    private void AplicarFuerzaSuccion()
+    {
+        if (player == null) return;
+
+        float distancia = Vector2.Distance(transform.position, player.transform.position);
+
+        if (distancia < radioSuccion)
+        {
+            Vector2 direccion = (transform.position - player.transform.position).normalized;
+
+            float factorFuerza = 1f - (distancia / radioSuccion);
+            Vector2 empuje = direccion * (fuerzaSuccion * factorFuerza);
+
+            PlayerMovement pm = player.GetComponent<PlayerMovement>();
+            if (pm != null)
+            {
+
+                pm.fuerzaSuccionExterna = empuje;
+
+                pm.multiplicadorVelocidadExterna = 0.2f;
+            }
+        }
+    }
+
 
     private IEnumerator EjecutarAtaqueFollow()
     {
