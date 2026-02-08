@@ -128,6 +128,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TentacleStartOffset
   boss: {fileID: 4432475020086275843}
+--- !u!1 &251377565936893870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5334456570777904442}
+  - component: {fileID: 105064274472487465}
+  m_Layer: 0
+  m_Name: Hitbox
+  m_TagString: Hazard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5334456570777904442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251377565936893870}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6467766311353629147}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &105064274472487465
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251377565936893870}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.042345285, y: 0.9210225}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.0326028, y: 0.9364816}
+  m_EdgeRadius: 0
 --- !u!1 &1552111577422106615
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,6 +629,7 @@ Transform:
   - {fileID: 350352465796669771}
   - {fileID: 5344994229446907634}
   - {fileID: 7581954024890827152}
+  - {fileID: 5334456570777904442}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7014565978843854152
@@ -656,6 +735,8 @@ MonoBehaviour:
   followingTentacle: {fileID: 28420043391314642, guid: c3cdffcdb20cb2d49b1aa96b529c8a88, type: 3}
   bossCrySFX: {fileID: 8300000, guid: 24d39cf691ede6740809b144a450c560, type: 3}
   startingRoarSFX: {fileID: 8300000, guid: b29b3093561f54f4bac521403afde460, type: 3}
+  deathSFX: {fileID: 8300000, guid: dbcc3853a060f7646a90103377317ceb, type: 3}
+  chuparSFX: {fileID: 8300000, guid: 8253ed46adc64b14382b73ea473c9f92, type: 3}
   duracionSuccion: 5
   fuerzaSuccion: 6.7
   radioSuccion: 10
@@ -974,6 +1055,26 @@ PrefabInstance:
     - target: {fileID: 3925349089609862112, guid: cdf61e16bde319946a5dc536bf8a6d54, type: 3}
       propertyPath: m_Name
       value: WeakPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925349089609862112, guid: cdf61e16bde319946a5dc536bf8a6d54, type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518079309313233582, guid: cdf61e16bde319946a5dc536bf8a6d54, type: 3}
+      propertyPath: m_Size.x
+      value: 1.7939851
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518079309313233582, guid: cdf61e16bde319946a5dc536bf8a6d54, type: 3}
+      propertyPath: m_Size.y
+      value: 0.8835492
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518079309313233582, guid: cdf61e16bde319946a5dc536bf8a6d54, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.026466131
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518079309313233582, guid: cdf61e16bde319946a5dc536bf8a6d54, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.058225393
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
