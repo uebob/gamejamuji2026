@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 551514289711498153}
   - component: {fileID: 1930563971103729555}
   m_Layer: 6
-  m_Name: BreakableTentacle
+  m_Name: FollowingTentacle
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

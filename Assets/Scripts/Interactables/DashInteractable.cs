@@ -5,17 +5,22 @@ public class DashInteractable : MonoBehaviour
 {
     private bool hasDeactivated = false;
     private Animator animator;
+    private Collider2D col;
     [SerializeField] float tiempoAutodestruccion = 5f; // Para que no se acumulen
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        col = GetComponent<Collider2D>();
     }
 
     private void Start()
     {
-        // Si el jugador no lo mata, se destruye solo para limpiar la escena
-        StartCoroutine(AutoLimpieza());
+        // Si el jugador no lo mata Y ES TENTACULO, se destruye solo para limpiar la escena
+        if(gameObject.CompareTag("Hazard")) StartCoroutine(AutoLimpieza());
+
+        if (col != null) col.enabled = false;
+        StartCoroutine(ActivateCollision());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -48,5 +53,11 @@ public class DashInteractable : MonoBehaviour
 
         yield return new WaitForSeconds(0.4f);
         Destroy(gameObject);
+    }
+
+    private IEnumerator ActivateCollision()
+    {
+       yield return new WaitForSeconds(0.5f);
+       if (col != null) col.enabled = true;
     }
 }

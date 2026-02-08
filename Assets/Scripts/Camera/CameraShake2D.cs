@@ -8,6 +8,10 @@ public class CameraShake2D : MonoBehaviour
     public float duration = 0.3f;
     public float magnitude = 0.3f;
 
+    [Header("Soft Shake Settings")]
+    public float softDuration = 0.15f;
+    public float softMagnitude = 0.1f;
+
     private Vector3 originalPos;
 
     private void Awake()
@@ -15,13 +19,16 @@ public class CameraShake2D : MonoBehaviour
         originalPos = transform.localPosition;
     }
 
-    /// <summary>
-    /// Llama a este m�todo para iniciar el shake
-    /// </summary>
     public void Shake()
     {
         StopAllCoroutines();
         StartCoroutine(ShakeCoroutine());
+    }
+
+    public void ShakeSoft()
+    {
+        StopAllCoroutines();
+        StartCoroutine(ShakeSoftCoroutine());
     }
 
     private IEnumerator ShakeCoroutine()
@@ -33,7 +40,6 @@ public class CameraShake2D : MonoBehaviour
             float t = timer / duration;
             float curveValue = shakeCurve.Evaluate(t);
 
-            // Aplica el shake multiplicando por la curva
             float offsetX = (Random.value * 2f - 1f) * magnitude * curveValue;
             float offsetY = (Random.value * 2f - 1f) * magnitude * curveValue;
 
@@ -43,7 +49,27 @@ public class CameraShake2D : MonoBehaviour
             yield return null;
         }
 
-        // Asegura que la c�mara vuelve a su posici�n original
+        transform.localPosition = originalPos;
+    }
+
+    private IEnumerator ShakeSoftCoroutine()
+    {
+        float timer = 0f;
+
+        while (timer < softDuration)
+        {
+            float t = timer / softDuration;
+            float curveValue = shakeCurve.Evaluate(t);
+
+            float offsetX = (Random.value * 2f - 1f) * softMagnitude * curveValue;
+            float offsetY = (Random.value * 2f - 1f) * softMagnitude * curveValue;
+
+            transform.localPosition = originalPos + new Vector3(offsetX, offsetY, 0f);
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
         transform.localPosition = originalPos;
     }
 }

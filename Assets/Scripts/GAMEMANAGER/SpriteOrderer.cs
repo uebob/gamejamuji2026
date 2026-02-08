@@ -17,7 +17,8 @@ public class SpriteOrderer : MonoBehaviour
             
         for (int i = 0; i < spriteRenderers.Length; i++)
         {
-            spriteRenderers[i].sortingOrder = i;
+            if(!spriteRenderers[i].CompareTag("Refill"))
+                spriteRenderers[i].sortingOrder = i;
         }
     }
 }
