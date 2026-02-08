@@ -8,7 +8,6 @@ public class PiedraDashInteractable : MonoBehaviour
     private bool hasDeactivated = false;
     private Animator animator;
     private Collider2D col;
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -23,22 +22,30 @@ public class PiedraDashInteractable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
         if (hasDeactivated) return;
 
         PlayerMovement player = collision.collider.GetComponent<PlayerMovement>();
 
-        if (player != null && player.isDashing)
+        if (player != null)
         {
-            vidapiedra -=1;
+          float fuerzaImpacto = collision.relativeVelocity.magnitude;
+
+            if (fuerzaImpacto > 10f || player.isDashing || player.isDashingGracePeriod)
+                {
+                    vidapiedra --;
+                    Debug.Log(vidapiedra);
+                }
+            if (vidapiedra <= 0)
+                {
+                    hasDeactivated = true;
+                    StopAllCoroutines();
+                    StartCoroutine(HideAndDestroy());
+                }
+
         }
 
-        if (player != null && player.isDashing && vidapiedra == 0)
-        {
-            hasDeactivated = true;
-            StopAllCoroutines(); // Para que no se autodestruya mientras se esconde
-            StartCoroutine(HideAndDestroy());
-        }
+        Debug.Log(vidapiedra);
+
     }
 
 

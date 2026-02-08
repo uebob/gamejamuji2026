@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip weakpointSFX;
     public AudioClip slimeSFX;
 
+    public AudioClip PiedraSFX;
+
     private Vector2 refillPrefabPosition;
     private Rigidbody2D rb;
     private Collider2D col;
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
 
     private SpriteRenderer sr;
+
 
     [HideInInspector] public Vector2 fuerzaSuccionExterna;
     [HideInInspector] public float multiplicadorVelocidadExterna = 1f;
@@ -266,6 +269,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("WeakPoint"))
         {
+
+            if (collision.gameObject.CompareTag("Piedra")) 
+            {
+                AudioManager.Instance?.PlaySFX(PiedraSFX);
+            }
+
             camShake?.Shake();
             camFlash?.Flash();
 

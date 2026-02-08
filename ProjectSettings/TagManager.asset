@@ -7,6 +7,7 @@ TagManager:
   - Refill
   - Hazard
   - FollowingTentacle
+  - Piedra
   layers:
   - Default
   - TransparentFX
