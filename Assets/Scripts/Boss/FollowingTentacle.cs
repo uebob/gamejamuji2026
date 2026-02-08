@@ -9,10 +9,15 @@ public class FollowingTentacle : MonoBehaviour
     public float speed = 5f;   
     public Vector3 offset;     
     private bool moving = false;
+    private Animator animator;
+    private Collider2D col;
 
     void Awake()
     {
+        animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+        col = GetComponent<Collider2D>();
+        col.enabled = false;
         StartCoroutine(StartMoving());
     }
 
@@ -30,7 +35,17 @@ public class FollowingTentacle : MonoBehaviour
 
     private IEnumerator StartMoving()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         moving = true;
+        col.enabled = true;
+        yield return new WaitForSeconds(6f);
+
+        if (animator != null)
+        {
+            animator.Play("tentaculo_escondiendose");
+        }
+
+        yield return new WaitForSeconds(0.4f);
+        Destroy(gameObject);
     }
 }

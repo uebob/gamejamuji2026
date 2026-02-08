@@ -78,10 +78,24 @@ public class BossController : MonoBehaviour
         // Limpiamos cualquier corrutina previa por seguridad
         StopAllCoroutines();
 
-        int ataqueAleatorio = Random.Range(0, 3);
-        if (ataqueAleatorio == 0) StartCoroutine(EjecutarAtaqueLluvia());
+        //si hay tentaculo :3
+        GameObject tentacleAlive = GameObject.FindGameObjectWithTag("FollowingTentacle");
+        Debug.Log(tentacleAlive);
+
+        int ataqueAleatorio;
+        if(tentacleAlive!=null) 
+        {
+            ataqueAleatorio = Random.Range(1, 3);
+        }
+        else 
+        {
+            ataqueAleatorio = Random.Range(0, 3);
+        }
+
+        
+        if (ataqueAleatorio == 0) StartCoroutine(EjecutarAtaqueFollow());
         else if (ataqueAleatorio == 1) StartCoroutine(EjecutarAtaqueTentaculo());
-        else if (ataqueAleatorio == 2) StartCoroutine(EjecutarAtaqueFollow());
+        else if (ataqueAleatorio == 2) StartCoroutine(EjecutarAtaqueLluvia());
     }
 
     private IEnumerator EjecutarAtaqueFollow()
@@ -108,32 +122,59 @@ public class BossController : MonoBehaviour
     {
         animator.Play("MIRAR_ARRIBA");
 
-        // Bajamos la cantidad a 15 para ser m�s ligeros
+        // Lista para recordar dónde han caído los rayos en esta tanda
+        List<Vector2> posicionesUsadas = new List<Vector2>();
+        float radioSeguridad = 1.5f; // Ajusta esto según el ancho de tu sprite del rayo
+        float radioCuadrado = radioSeguridad * radioSeguridad; // Optimización: evitamos raíces cuadradas
+
         for (int i = 0; i < 20; i++)
         {
-            Vector2 posicion;
-            // 30% de probabilidad de ir al jugador, 70% aleatorio
-            if (Random.value < 0.3f && player != null)
+            Vector2 posicionCandidata = Vector2.zero;
+            bool posicionValida = false;
+            int intentos = 0;
+
+            // Intentamos encontrar una posición válida (máximo 10 intentos para no colgar el juego)
+            while (!posicionValida && intentos < 10)
             {
-                posicion = player.transform.position;
-            }
-            else
-            {
-                float posX = Random.Range(-6f, 6f);
-                float posY = Random.Range(-4f, 4f);
-                posicion = new Vector2(posX, posY);
+                intentos++;
+
+                // 30% probabilidad de ir al jugador (solo en el primer intento para no sesgar)
+                if (intentos == 1 && Random.value < 0.3f && player != null)
+                {
+                    posicionCandidata = player.transform.position;
+                }
+                else
+                {
+                    float posX = Random.Range(-6f, 6f);
+                    float posY = Random.Range(-4f, 4f);
+                    posicionCandidata = new Vector2(posX, posY);
+                }
+
+                // Comprobamos si esta posición choca con alguna anterior
+                posicionValida = true;
+                foreach (Vector2 posExistente in posicionesUsadas)
+                {
+                    // Usamos sqrMagnitude que es mucho más rápido que Distance
+                    if ((posicionCandidata - posExistente).sqrMagnitude < radioCuadrado)
+                    {
+                        posicionValida = false;
+                        break; // Ya choca con una, descartamos y probamos otra vez
+                    }
+                }
             }
 
-            Instantiate(lightning, posicion, Quaternion.identity);
+            // Instanciamos en la posición encontrada (o la última probada si fallaron los 10 intentos)
+            Instantiate(lightning, posicionCandidata, Quaternion.identity);
+            
+            // Guardamos la posición en la lista para que los siguientes rayos la eviten
+            posicionesUsadas.Add(posicionCandidata);
 
-            // Esperar un poquito entre rayos es vital para que no pete
             yield return new WaitForSeconds(0.1f);
         }
 
         animator.Play("MIRAR_ABAJO", 0, 0f);
         yield return new WaitForSeconds(1f);
 
-        // Iniciamos la vulnerabilidad
         yield return StartCoroutine(VentanaDeAtaqueRoutine());
     }
 

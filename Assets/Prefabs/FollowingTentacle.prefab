@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 2388716183032452090}
   - component: {fileID: 2967922087680631205}
   - component: {fileID: 551514289711498153}
-  - component: {fileID: 1930563971103729555}
   - component: {fileID: 6093094561276920974}
   m_Layer: 6
   m_Name: FollowingTentacle
-  m_TagString: Hazard
+  m_TagString: FollowingTentacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,19 +162,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.6217145, y: 0.51221997}
   m_EdgeRadius: 0
---- !u!114 &1930563971103729555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28420043391314642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6257db1dbf918f149ab526d2af4dd0a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DashInteractable
-  tiempoAutodestruccion: 10
 --- !u!114 &6093094561276920974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +174,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12fe957ca988e794c93ad9c24897f104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowingTentacle
-  player: {fileID: 2003374516256770679, guid: 9f4debd86db2e7045bd48d03f001a844, type: 3}
-  speed: 1
+  speed: 2
   offset: {x: 0, y: 0, z: 0}

@@ -26,9 +26,9 @@ public class Lightning : MonoBehaviour
     {
         if (sr != null) sr.color = new Color(1f, 1f, 1f, 0.5f);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
-        // Si el objeto fue destruido mientras esperábamos, salimos
+        // Si el objeto fue destruido mientras esperï¿½bamos, salimos
         if (this == null) yield break;
 
         if (sr != null) sr.color = new Color(1f, 1f, 1f, 1f);
