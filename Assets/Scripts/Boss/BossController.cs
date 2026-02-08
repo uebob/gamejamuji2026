@@ -80,7 +80,6 @@ public class BossController : MonoBehaviour
 
         //si hay tentaculo :3
         GameObject tentacleAlive = GameObject.FindGameObjectWithTag("FollowingTentacle");
-        Debug.Log(tentacleAlive);
 
         int ataqueAleatorio;
         if(tentacleAlive!=null) 
