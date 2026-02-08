@@ -10,10 +10,10 @@ public class BossController : MonoBehaviour
     [SerializeField] private float tiempoEntreAtaques = 2f;
     private float tiempoUltimoAtaque;
 
-    [SerializeField] private TentacleAttack tentaculoIzquierdo;
-    [SerializeField] private TentacleAttack tentaculoDerecho;
+    //[SerializeField] private TentacleAttack tentaculoIzquierdo;
+    //[SerializeField] private TentacleAttack tentaculoDerecho;
     [SerializeField] private EyeController ojo;
-    [SerializeField] private LaserRain lanzadorLaseres;
+    //[SerializeField] private LaserRain lanzadorLaseres;
 
     void Start()
     {
