@@ -130,8 +130,6 @@ public class PlayerMovement : MonoBehaviour
             ghostSr.sprite = sr.sprite;
             ghostSr.flipX = sr.flipX;
             ghostSr.flipY = sr.flipY;
-            ghostSr.sortingLayerID = sr.sortingLayerID;
-            ghostSr.sortingOrder = sr.sortingOrder + 1; // Un poco por encima para que se vea
             
             // 3. Le aplicamos el shader BLANCO puro
             ghostSr.material = new Material(Shader.Find("GUI/Text Shader"));
